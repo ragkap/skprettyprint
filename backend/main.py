@@ -1,3 +1,4 @@
+import hashlib
 import logging
 import os
 from pathlib import Path
@@ -5,7 +6,7 @@ from urllib.parse import quote
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import FileResponse, Response
+from fastapi.responses import Response
 from fastapi.staticfiles import StaticFiles
 
 load_dotenv()
@@ -22,6 +23,14 @@ log = logging.getLogger("prettyprint")
 
 ROOT = Path(__file__).resolve().parent.parent
 FRONTEND_DIR = ROOT / "frontend"
+
+
+def _asset_hash(name: str) -> str:
+    path = FRONTEND_DIR / name
+    if not path.exists():
+        return "0"
+    return hashlib.md5(path.read_bytes()).hexdigest()[:8]
+
 
 app = FastAPI(title="Smartkarma Pretty Print Utility")
 
@@ -58,7 +67,14 @@ def api_primer(ticker: str = Query(..., min_length=1, max_length=40)):
 
 @app.get("/")
 def index():
-    return FileResponse(FRONTEND_DIR / "index.html")
+    html = (FRONTEND_DIR / "index.html").read_text()
+    html = html.replace("/static/styles.css", f"/static/styles.css?v={_asset_hash('styles.css')}")
+    html = html.replace("/static/app.js", f"/static/app.js?v={_asset_hash('app.js')}")
+    return Response(
+        content=html,
+        media_type="text/html",
+        headers={"Cache-Control": "no-cache, no-store, must-revalidate"},
+    )
 
 
 app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
