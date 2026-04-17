@@ -52,6 +52,31 @@
         <input type="hidden" id="ticker" name="ticker">
         <div id="status" class="status" aria-live="polite"></div>
       </form>
+
+      <details class="api-docs">
+        <summary>API usage</summary>
+        <div class="api-body">
+          <p class="api-intro">Skip the UI — hit the endpoint directly. Base URL: <code id="api-base"></code></p>
+
+          <h4>Get a Primer PDF by Bloomberg ticker</h4>
+          <pre><code id="curl-primer"></code><button class="copy-btn" data-copy="curl-primer" type="button">Copy</button></pre>
+
+          <h4>Save with the server-provided filename</h4>
+          <pre><code id="curl-primer-oj"></code><button class="copy-btn" data-copy="curl-primer-oj" type="button">Copy</button></pre>
+
+          <h4>Search by company name or ticker</h4>
+          <pre><code id="curl-search"></code><button class="copy-btn" data-copy="curl-search" type="button">Copy</button></pre>
+          <p class="api-note">Returns JSON: <code>{"results": [{"name": "DBS", "ticker": "DBS SP"}, …]}</code></p>
+
+          <h4>Notes</h4>
+          <ul class="api-notes">
+            <li>URL-encode spaces in tickers: <code>DBS SP</code> → <code>DBS%20SP</code> (or wrap the URL in quotes).</li>
+            <li><code>404</code> if no primer exists for that ticker; <code>500</code> on generation failure. Both return JSON <code>{"detail": "…"}</code>.</li>
+            <li>Expect 10–20s response time (DB query + yfinance chart + WeasyPrint render).</li>
+            <li>No auth on endpoints — do not expose publicly without an API key.</li>
+          </ul>
+        </div>
+      </details>
     </section>
 
     <section id="panel-insight" class="panel">

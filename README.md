@@ -43,4 +43,43 @@ Open http://localhost:8000.
 5. Deploy. Server listens on `$PORT` (Railway injects this).
 
 The app fails fast on startup if any `DB_*` var is missing.
-# skprettyprint
+
+## API usage (curl)
+
+The frontend is optional — you can hit the HTTP endpoints directly.
+
+Replace `YOUR-APP.up.railway.app` with your Railway domain (or `localhost:8000` for local dev).
+
+### Get a Primer PDF by Bloomberg ticker
+
+```bash
+curl -L -o primer.pdf \
+  "https://YOUR-APP.up.railway.app/api/primer?ticker=DBS%20SP"
+```
+
+To save with the server-provided filename (e.g. `DBS Group (DBS SP)  | Smartkarma Primer 20260417.pdf`):
+
+```bash
+curl -LOJ "https://YOUR-APP.up.railway.app/api/primer?ticker=DBS%20SP"
+```
+
+### Search by company name or ticker
+
+```bash
+curl -s "https://YOUR-APP.up.railway.app/api/search?q=DBS"
+```
+
+Returns JSON:
+
+```json
+{"results": [{"name": "DBS", "ticker": "DBS SP"}, ...]}
+```
+
+Then pass the `ticker` into `/api/primer`.
+
+### Notes
+
+- URL-encode spaces in tickers: `DBS SP` → `DBS%20SP` (or just wrap the URL in quotes).
+- `404` if no primer exists for that ticker; `500` on generation failure. Both come back as JSON `{"detail": "..."}`.
+- Expect 10–20s response time (DB query + yfinance chart + WeasyPrint render).
+- No auth on endpoints — don't expose publicly without adding an API key.

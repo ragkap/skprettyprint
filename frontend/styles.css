@@ -225,3 +225,116 @@ button[type="submit"]:disabled { opacity: 0.6; cursor: progress; }
 
 .status.is-error { color: var(--danger); }
 .status.is-success { color: var(--accent); }
+
+.api-docs {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.api-docs summary {
+  cursor: pointer;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  list-style: none;
+  user-select: none;
+}
+
+.api-docs summary::-webkit-details-marker { display: none; }
+
+.api-docs summary::before {
+  content: "+ ";
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.api-docs[open] summary::before { content: "− "; }
+
+.api-body { margin-top: 24px; }
+
+.api-body h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  font-weight: 500;
+  margin: 24px 0 8px;
+}
+
+.api-body p {
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+.api-intro { color: var(--muted); font-size: 13px; }
+
+.api-body code {
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  font-size: 12.5px;
+  background: #f3f3f3;
+  padding: 2px 6px;
+  border-radius: 2px;
+  color: var(--ink);
+}
+
+.api-body pre {
+  position: relative;
+  background: #0f0f0f;
+  color: #e8e8e8;
+  padding: 14px 16px;
+  padding-right: 72px;
+  border-radius: var(--radius);
+  font-size: 12.5px;
+  line-height: 1.5;
+  overflow-x: auto;
+  margin: 0 0 12px;
+}
+
+.api-body pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: 1px solid #333;
+  color: #ccc;
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+.copy-btn.is-copied { color: var(--accent); border-color: var(--accent); }
+
+.api-note {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: -4px;
+}
+
+.api-notes {
+  color: var(--ink);
+  padding-left: 20px;
+  margin: 0;
+}
+
+.api-notes li {
+  margin-bottom: 6px;
+  color: var(--muted);
+}

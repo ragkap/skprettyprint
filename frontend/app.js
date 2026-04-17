@@ -1,3 +1,34 @@
+const base = window.location.origin;
+const snippets = {
+  'api-base': base,
+  'curl-primer': `curl -L -o primer.pdf \\\n  "${base}/api/primer?ticker=DBS%20SP"`,
+  'curl-primer-oj': `curl -LOJ "${base}/api/primer?ticker=DBS%20SP"`,
+  'curl-search': `curl -s "${base}/api/search?q=DBS"`,
+};
+Object.entries(snippets).forEach(([id, text]) => {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+});
+
+document.querySelectorAll('.copy-btn').forEach((btn) => {
+  btn.addEventListener('click', async () => {
+    const target = document.getElementById(btn.dataset.copy);
+    if (!target) return;
+    try {
+      await navigator.clipboard.writeText(target.textContent);
+      const original = btn.textContent;
+      btn.textContent = 'Copied';
+      btn.classList.add('is-copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('is-copied');
+      }, 1400);
+    } catch {
+      btn.textContent = 'Failed';
+    }
+  });
+});
+
 const tabs = document.querySelectorAll('.tab');
 const panels = {
   primer: document.getElementById('panel-primer'),
