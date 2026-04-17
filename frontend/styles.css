@@ -1,0 +1,227 @@
+:root {
+  --accent: #24a9a7;
+  --accent-dim: #1c8887;
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --ink: #111111;
+  --muted: #6b6b6b;
+  --border: #e7e7e7;
+  --danger: #c0392b;
+  --radius: 2px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 40px;
+  background: var(--surface);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+}
+
+.wordmark {
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 40px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.tab {
+  background: transparent;
+  border: 0;
+  padding: 16px 20px;
+  font: inherit;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  letter-spacing: 0.3px;
+}
+
+.tab:hover { color: var(--ink); }
+
+.tab.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+  font-weight: 500;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 40px 120px;
+}
+
+.panel { display: none; }
+.panel.is-active { display: block; }
+
+.panel-head { margin-bottom: 48px; }
+
+h1 {
+  font-weight: 300;
+  font-size: 36px;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px;
+}
+
+.accent { color: var(--accent); font-weight: 500; }
+
+.sub {
+  color: var(--muted);
+  margin: 0;
+  font-size: 14px;
+}
+
+.form { display: block; }
+
+.label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.combobox {
+  flex: 1;
+  position: relative;
+}
+
+.combobox input {
+  width: 100%;
+}
+
+.results {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  max-height: 320px;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.results li {
+  padding: 10px 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 14px;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.results li:last-child { border-bottom: 0; }
+
+.results li:hover,
+.results li.is-active {
+  background: #f7fbfb;
+}
+
+.results .res-name {
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.results .res-ticker {
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.results .res-empty {
+  color: var(--muted);
+  cursor: default;
+  justify-content: center;
+}
+.results .res-empty:hover { background: transparent; }
+
+input[type="text"] {
+  flex: 1;
+  padding: 14px 16px;
+  font: inherit;
+  font-size: 15px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent);
+}
+
+button[type="submit"] {
+  padding: 14px 24px;
+  font: inherit;
+  font-weight: 500;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.15s ease;
+}
+
+button[type="submit"]:hover:not(:disabled) { background: var(--accent-dim); }
+button[type="submit"]:disabled { opacity: 0.6; cursor: progress; }
+
+.status {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--muted);
+  min-height: 20px;
+}
+
+.status.is-error { color: var(--danger); }
+.status.is-success { color: var(--accent); }

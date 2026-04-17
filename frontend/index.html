@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smartkarma Pretty Print Utility</title>
+  <link rel="icon" type="image/png" href="https://sk-assets.s3.amazonaws.com/online-branding-manual/01-logotypes/curation-compass-box-full-colour-1000px.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img class="brand-icon" src="https://sk-assets.s3.amazonaws.com/online-branding-manual/01-logotypes/curation-compass-box-full-colour-1000px.png" alt="">
+      <span class="wordmark">Smartkarma Pretty Print Utility</span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab is-active" data-tab="primer" role="tab">Primer</button>
+    <button class="tab" data-tab="insight" role="tab">Insight</button>
+    <button class="tab" data-tab="ebook" role="tab">eBook</button>
+  </nav>
+
+  <main>
+    <section id="panel-primer" class="panel is-active">
+      <div class="panel-head">
+        <h1>Pretty Print <span class="accent">Primer</span></h1>
+        <p class="sub">Enter a Bloomberg ticker to generate a Smartkarma Primer PDF.</p>
+      </div>
+
+      <form id="primer-form" class="form">
+        <label for="search" class="label">Company or Bloomberg Ticker</label>
+        <div class="row">
+          <div class="combobox" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+            <input
+              id="search"
+              name="search"
+              type="text"
+              placeholder="e.g. DBS SP or DBS Group"
+              autocomplete="off"
+              spellcheck="false"
+              aria-autocomplete="list"
+              aria-controls="search-results"
+              required>
+            <ul id="search-results" class="results" role="listbox" hidden></ul>
+          </div>
+          <button type="submit" id="submit-btn">Generate</button>
+        </div>
+        <input type="hidden" id="ticker" name="ticker">
+        <div id="status" class="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section id="panel-insight" class="panel">
+      <div class="panel-head">
+        <h1>Pretty Print <span class="accent">Insight</span></h1>
+        <p class="sub">Coming soon.</p>
+      </div>
+    </section>
+
+    <section id="panel-ebook" class="panel">
+      <div class="panel-head">
+        <h1>Pretty Print <span class="accent">eBook</span></h1>
+        <p class="sub">Coming soon.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
